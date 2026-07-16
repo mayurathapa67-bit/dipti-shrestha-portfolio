@@ -4,8 +4,6 @@ import path from "node:path";
 import { DEFAULT_CONTENT } from "./seed";
 import type { SiteContent } from "./types";
 
-const GITHUB_RAW_BASE =
-  "https://raw.githubusercontent.com/diptishrestha/portfolio-content/main";
 const LOCAL_CONTENT_PATH = path.join(process.cwd(), "data", "content.json");
 
 function isSiteContent(value: unknown): value is SiteContent {
@@ -31,18 +29,35 @@ function readLocalFile(): SiteContent {
 }
 
 export async function getContent(): Promise<SiteContent> {
-  try {
-    const res = await fetch(`${GITHUB_RAW_BASE}/content.json`, {
-      cache: "no-store",
-      next: { revalidate: 0 },
-    });
-    if (res.ok) {
-      const parsed: unknown = await res.json();
-      if (isSiteContent(parsed)) return parsed;
+  // When USE_GITHUB_CONTENT=true (set on the deployed host, e.g. Vercel),
+  // GitHub is the persistent store: reads come from the raw file with
+  // no-store so they are always fresh (no CDN caching). This is what makes
+  // admin saves durable across serverless instances, since the local
+  // filesystem on Vercel is ephemeral.
+  if (process.env.USE_GITHUB_CONTENT === "true") {
+    const owner = process.env.GITHUB_REPO_OWNER;
+    const repo = process.env.GITHUB_REPO_NAME;
+    if (owner && repo) {
+      try {
+        const res = await fetch(
+          `https://raw.githubusercontent.com/${owner}/${repo}/${
+            process.env.GITHUB_BRANCH ?? "main"
+          }/content.json`,
+          { cache: "no-store", next: { revalidate: 0 } }
+        );
+        if (res.ok) {
+          const parsed: unknown = await res.json();
+          if (isSiteContent(parsed)) return parsed;
+        }
+      } catch {
+        // fall through to local
+      }
     }
-  } catch {
-    // Network or parsing failure — fall through to local file.
   }
+
+  // Default: local file is the source of truth. This reflects admin saves
+  // immediately on the same running instance (local dev, or a warm
+  // serverless instance) without risking stale remote data.
   return readLocalFile();
 }
 
