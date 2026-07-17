@@ -28,40 +28,63 @@ function readLocalFile(): SiteContent {
   }
 }
 
-export async function getContent(): Promise<SiteContent> {
-  // When USE_GITHUB_CONTENT=true (set on the deployed host, e.g. Vercel),
-  // GitHub is the persistent store: reads come from the raw file with
-  // no-store so they are always fresh (no CDN caching). This is what makes
-  // admin saves durable across serverless instances, since the local
-  // filesystem on Vercel is ephemeral.
-  if (process.env.USE_GITHUB_CONTENT === "true") {
-    const combined = process.env.GITHUB_REPO ?? "";
-    const [ownerFromCombined, repoFromCombined] = combined.includes("/")
-      ? combined.split("/")
-      : ["", ""];
-    const owner = ownerFromCombined || process.env.GITHUB_REPO_OWNER;
-    const repo = repoFromCombined || process.env.GITHUB_REPO_NAME;
-    if (owner && repo) {
-      try {
-        const res = await fetch(
-          `https://raw.githubusercontent.com/${owner}/${repo}/${
-            process.env.GITHUB_BRANCH ?? "main"
-          }/content.json`,
-          { cache: "no-store", next: { revalidate: 0 } }
-        );
-        if (res.ok) {
-          const parsed: unknown = await res.json();
-          if (isSiteContent(parsed)) return parsed;
-        }
-      } catch {
-        // fall through to local
+function resolveRepo(): { owner: string; name: string } {
+  const combined = process.env.GITHUB_REPO ?? "";
+  if (combined.includes("/")) {
+    const [owner, name] = combined.split("/");
+    return { owner, name };
+  }
+  return {
+    owner: process.env.GITHUB_REPO_OWNER ?? "",
+    name: process.env.GITHUB_REPO_NAME ?? "",
+  };
+}
+
+async function readFromGitHub(): Promise<SiteContent | null> {
+  const token = process.env.GITHUB_TOKEN ?? "";
+  const { owner, name } = resolveRepo();
+  const branch = process.env.GITHUB_BRANCH ?? "main";
+  if (!owner || !name) return null;
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${owner}/${name}/contents/content.json?ref=${branch}`,
+      {
+        headers: {
+          Accept: "application/vnd.github.raw+json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        cache: "no-store",
+        next: { revalidate: 0 },
       }
-    }
+    );
+    if (!res.ok) return null;
+    const parsed: unknown = await res.json();
+    if (isSiteContent(parsed)) return parsed;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+export async function getContent(): Promise<SiteContent> {
+  // GitHub is the persistent store on serverless hosts (e.g. Vercel), where
+  // the local filesystem is ephemeral. Read from GitHub whenever a repo is
+  // configured (and by default in production), so admin saves are durable and
+  // visible across serverless instances. Uses the authenticated Contents API
+  // with no-store to always get fresh data (avoids raw CDN caching).
+  const useGitHub =
+    process.env.USE_GITHUB_CONTENT === "true" ||
+    (process.env.NODE_ENV === "production" &&
+      process.env.USE_GITHUB_CONTENT !== "false");
+
+  if (useGitHub) {
+    const remote = await readFromGitHub();
+    if (remote) return remote;
   }
 
-  // Default: local file is the source of truth. This reflects admin saves
-  // immediately on the same running instance (local dev, or a warm
-  // serverless instance) without risking stale remote data.
+  // Fallback: local file. Reflects admin saves immediately on the same
+  // running instance (local dev, or a warm serverless instance).
   return readLocalFile();
 }
 
