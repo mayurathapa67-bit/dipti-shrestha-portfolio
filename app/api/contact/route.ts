@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const entry = addSubmission(body);
+  const entry = await addSubmission(body);
   const res = NextResponse.json({ ok: true, id: entry.id });
   res.headers.set("Cache-Control", "no-store, max-age=0");
   return res;

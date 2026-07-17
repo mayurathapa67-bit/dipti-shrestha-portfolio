@@ -68,6 +68,14 @@ export async function pushContentToGitHub(
     };
   }
   const filePath = "content.json";
+  return putFileToGitHub(filePath, content, "Update portfolio content via admin panel");
+}
+
+export async function putFileToGitHub(
+  filePath: string,
+  content: unknown,
+  message: string
+): Promise<GitHubFileResult> {
   const sha = await getGitHubFileSha(filePath);
   try {
     const res = await fetch(
@@ -80,7 +88,7 @@ export async function pushContentToGitHub(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          message: "Update portfolio content via admin panel",
+          message,
           content: Buffer.from(JSON.stringify(content, null, 2)).toString(
             "base64"
           ),
@@ -105,5 +113,28 @@ export async function pushContentToGitHub(
       success: false,
       message: err instanceof Error ? err.message : "GitHub push error.",
     };
+  }
+}
+
+export async function getFileFromGitHub(
+  filePath: string
+): Promise<unknown | null> {
+  if (!TOKEN || !REPO_OWNER || !REPO_NAME) return null;
+  try {
+    const res = await fetch(
+      `${GITHUB_API_BASE}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}?ref=${BRANCH}`,
+      {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          Accept: "application/vnd.github.raw+json",
+        },
+        cache: "no-store",
+        next: { revalidate: 0 },
+      }
+    );
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
   }
 }

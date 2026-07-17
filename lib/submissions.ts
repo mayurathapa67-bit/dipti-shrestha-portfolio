@@ -2,8 +2,16 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 import type { ContactSubmission } from "./types";
+import {
+  putFileToGitHub,
+  getFileFromGitHub,
+} from "./github";
 
 const SUBMISSIONS_PATH = path.join(process.cwd(), "data", "submissions.json");
+
+function useGitHub(): boolean {
+  return process.env.USE_GITHUB_CONTENT === "true";
+}
 
 function ensureFile(): void {
   try {
@@ -15,7 +23,7 @@ function ensureFile(): void {
   }
 }
 
-export function getSubmissions(): ContactSubmission[] {
+function readLocal(): ContactSubmission[] {
   try {
     ensureFile();
     const raw = fs.readFileSync(SUBMISSIONS_PATH, "utf-8");
@@ -27,9 +35,29 @@ export function getSubmissions(): ContactSubmission[] {
   }
 }
 
-export function addSubmission(
+function writeLocal(all: ContactSubmission[]): boolean {
+  try {
+    ensureFile();
+    fs.writeFileSync(SUBMISSIONS_PATH, JSON.stringify(all, null, 2), "utf-8");
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function getSubmissions(): ContactSubmission[] {
+  // When GitHub is the source of truth (serverless hosts), read from there,
+  // falling back to the local file if the remote is unavailable.
+  if (useGitHub()) {
+    const remote = getFileFromGitHub("submissions.json");
+    if (Array.isArray(remote)) return remote as ContactSubmission[];
+  }
+  return readLocal();
+}
+
+export async function addSubmission(
   submission: Omit<ContactSubmission, "id" | "created_at">
-): ContactSubmission {
+): Promise<ContactSubmission> {
   const entry: ContactSubmission = {
     ...submission,
     id:
@@ -40,22 +68,36 @@ export function addSubmission(
   };
   const all = getSubmissions();
   all.unshift(entry);
-  try {
-    fs.writeFileSync(SUBMISSIONS_PATH, JSON.stringify(all, null, 2), "utf-8");
-  } catch {
-    // Swallow write errors; submission object is still returned.
+
+  let persisted = writeLocal(all);
+
+  if (useGitHub()) {
+    const result = await putFileToGitHub(
+      "submissions.json",
+      all,
+      "Add contact submission via site form"
+    );
+    persisted = result.success || persisted;
   }
+
   return entry;
 }
 
-export function deleteSubmission(id: string): boolean {
+export async function deleteSubmission(id: string): Promise<boolean> {
   const all = getSubmissions();
   const next = all.filter((s) => s.id !== id);
   if (next.length === all.length) return false;
-  try {
-    fs.writeFileSync(SUBMISSIONS_PATH, JSON.stringify(next, null, 2), "utf-8");
-    return true;
-  } catch {
-    return false;
+
+  let persisted = writeLocal(next);
+
+  if (useGitHub()) {
+    const result = await putFileToGitHub(
+      "submissions.json",
+      next,
+      "Delete contact submission via admin panel"
+    );
+    persisted = result.success || persisted;
   }
+
+  return persisted;
 }

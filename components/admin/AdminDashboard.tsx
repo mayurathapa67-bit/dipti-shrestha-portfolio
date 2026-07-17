@@ -660,12 +660,17 @@ function TestimonialsManager({
 function SubmissionsTab() {
   const [subs, setSubs] = useState<ContactSubmission[]>([]);
   const [loading, setLoading] = useState(true);
+  const [msg, setMsg] = useState("");
 
   const load = async () => {
     const res = await fetch("/api/submissions", { cache: "no-store" });
     if (res.ok) {
       const data = (await res.json()) as { submissions: ContactSubmission[] };
       setSubs(Array.isArray(data.submissions) ? data.submissions : []);
+    } else if (res.status === 401) {
+      setMsg("Session expired. Please log in again.");
+    } else {
+      setMsg("Could not load submissions. Retrying…");
     }
     setLoading(false);
   };
@@ -687,7 +692,13 @@ function SubmissionsTab() {
   if (loading) return <p className="text-ink-soft">Loading submissions...</p>;
 
   if (subs.length === 0)
-    return <p className="text-ink-soft">No contact submissions yet.</p>;
+    return (
+      <p className="text-ink-soft">
+        {msg || "No contact submissions yet."}
+      </p>
+    );
+
+  if (msg) return <p className="text-ink-soft">{msg}</p>;
 
   return (
     <div className="space-y-4">
