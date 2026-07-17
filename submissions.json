@@ -1,11 +1,11 @@
 [
   {
-    "email": "live@diag.com",
-    "message": "env check",
-    "name": "LIVE DIAG",
-    "subject": "diag",
-    "id": "a16e0faa-e45b-495b-aee6-703fa3c84ac3",
-    "created_at": "2026-07-17T04:33:51.650Z"
+    "email": "e@f.com",
+    "message": "after env fix",
+    "name": "ENV FIX TEST",
+    "subject": "verify",
+    "id": "187f55eb-7000-4d71-831c-553c5941cffd",
+    "created_at": "2026-07-17T04:36:38.119Z"
   },
   {
     "email": "r@e.com",
