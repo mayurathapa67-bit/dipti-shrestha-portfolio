@@ -1,11 +1,11 @@
 [
   {
-    "email": "w@a.com",
-    "message": "after wait",
-    "name": "WAIT TEST",
-    "subject": "w",
-    "id": "b726166d-5189-4f45-a227-deeab30a10ed",
-    "created_at": "2026-07-17T04:39:48.924Z"
+    "email": "p@r.com",
+    "message": "propagation",
+    "name": "PROP TEST",
+    "subject": "pr",
+    "id": "dd9afef0-00ad-4831-b1e3-fe3eb4dc001e",
+    "created_at": "2026-07-17T04:44:15.753Z"
   },
   {
     "email": "r@e.com",
