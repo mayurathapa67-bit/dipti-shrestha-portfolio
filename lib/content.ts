@@ -2,6 +2,7 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 import { DEFAULT_CONTENT } from "./seed";
+import { isGitHubEnabled } from "./github";
 import type { SiteContent } from "./types";
 
 const LOCAL_CONTENT_PATH = path.join(process.cwd(), "data", "content.json");
@@ -73,10 +74,7 @@ export async function getContent(): Promise<SiteContent> {
   // configured (and by default in production), so admin saves are durable and
   // visible across serverless instances. Uses the authenticated Contents API
   // with no-store to always get fresh data (avoids raw CDN caching).
-  const useGitHub =
-    process.env.USE_GITHUB_CONTENT === "true" ||
-    (process.env.NODE_ENV === "production" &&
-      process.env.USE_GITHUB_CONTENT !== "false");
+  const useGitHub = isGitHubEnabled();
 
   if (useGitHub) {
     const remote = await readFromGitHub();

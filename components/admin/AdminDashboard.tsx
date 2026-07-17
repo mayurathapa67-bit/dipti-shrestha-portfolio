@@ -667,6 +667,7 @@ function SubmissionsTab() {
     if (res.ok) {
       const data = (await res.json()) as { submissions: ContactSubmission[] };
       setSubs(Array.isArray(data.submissions) ? data.submissions : []);
+      setMsg("");
     } else if (res.status === 401) {
       setMsg("Session expired. Please log in again.");
     } else {
@@ -678,7 +679,7 @@ function SubmissionsTab() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
-    const id = setInterval(load, 8000);
+    const id = setInterval(load, 5000);
     return () => clearInterval(id);
   }, []);
 

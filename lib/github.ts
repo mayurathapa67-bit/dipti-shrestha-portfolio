@@ -24,6 +24,16 @@ export type GitHubFileResult = {
   sha?: string;
 };
 
+export function isGitHubEnabled(): boolean {
+  const configured = Boolean(TOKEN && REPO_OWNER && REPO_NAME);
+  if (!configured) return false;
+  // Explicit opt-in via USE_GITHUB_CONTENT takes priority.
+  if (process.env.USE_GITHUB_CONTENT === "true") return true;
+  if (process.env.USE_GITHUB_CONTENT === "false") return false;
+  // Default: use GitHub in production (serverless FS is ephemeral), local in dev.
+  return process.env.NODE_ENV === "production";
+}
+
 export async function getGitHubFileSha(
   path: string
 ): Promise<string | null> {

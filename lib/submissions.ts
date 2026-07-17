@@ -5,12 +5,13 @@ import type { ContactSubmission } from "./types";
 import {
   putFileToGitHub,
   getFileFromGitHub,
+  isGitHubEnabled,
 } from "./github";
 
 const SUBMISSIONS_PATH = path.join(process.cwd(), "data", "submissions.json");
 
 function useGitHub(): boolean {
-  return process.env.USE_GITHUB_CONTENT === "true";
+  return isGitHubEnabled();
 }
 
 function ensureFile(): void {
