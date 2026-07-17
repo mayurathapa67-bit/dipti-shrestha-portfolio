@@ -34,6 +34,10 @@ export function isGitHubEnabled(): boolean {
   return process.env.NODE_ENV === "production";
 }
 
+export function isGitHubConfigured(): boolean {
+  return Boolean(TOKEN && REPO_OWNER && REPO_NAME);
+}
+
 export async function getGitHubFileSha(
   path: string
 ): Promise<string | null> {

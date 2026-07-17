@@ -5,14 +5,10 @@ import type { ContactSubmission } from "./types";
 import {
   putFileToGitHub,
   getFileFromGitHub,
-  isGitHubEnabled,
+  isGitHubConfigured,
 } from "./github";
 
 const SUBMISSIONS_PATH = path.join(process.cwd(), "data", "submissions.json");
-
-function useGitHub(): boolean {
-  return isGitHubEnabled();
-}
 
 function ensureFile(): void {
   try {
@@ -47,10 +43,16 @@ function writeLocal(all: ContactSubmission[]): boolean {
 }
 
 export function getSubmissions(): ContactSubmission[] {
-  // When GitHub is the source of truth (serverless hosts), read from there,
-  // falling back to the local file if the remote is unavailable.
-  if (useGitHub()) {
+  // Always prefer GitHub when it is configured (serverless hosts have an
+  // ephemeral local FS, so the local file is never the source of truth).
+  // Fall back to the local file only if the remote read fails.
+  if (isGitHubConfigured()) {
     const remote = getFileFromGitHub("submissions.json");
+    if (Array.isArray(remote) && remote.length > 0) {
+      return remote as ContactSubmission[];
+    }
+    // Remote empty/missing: still prefer it, but fall back so the admin can
+    // at least see locally-saved entries during an outage.
     if (Array.isArray(remote)) return remote as ContactSubmission[];
   }
   return readLocal();
@@ -72,7 +74,7 @@ export async function addSubmission(
 
   let persisted = writeLocal(all);
 
-  if (useGitHub()) {
+  if (isGitHubConfigured()) {
     const result = await putFileToGitHub(
       "submissions.json",
       all,
@@ -91,7 +93,7 @@ export async function deleteSubmission(id: string): Promise<boolean> {
 
   let persisted = writeLocal(next);
 
-  if (useGitHub()) {
+  if (isGitHubConfigured()) {
     const result = await putFileToGitHub(
       "submissions.json",
       next,
