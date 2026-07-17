@@ -58,7 +58,7 @@ export function getSubmissions(): ContactSubmission[] {
 
 export async function addSubmission(
   submission: Omit<ContactSubmission, "id" | "created_at">
-): Promise<ContactSubmission> {
+): Promise<{ entry: ContactSubmission; persisted: boolean }> {
   const entry: ContactSubmission = {
     ...submission,
     id:
@@ -81,7 +81,7 @@ export async function addSubmission(
     persisted = result.success || persisted;
   }
 
-  return entry;
+  return { entry, persisted };
 }
 
 export async function deleteSubmission(id: string): Promise<boolean> {

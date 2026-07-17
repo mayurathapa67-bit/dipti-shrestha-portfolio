@@ -34,7 +34,13 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const entry = await addSubmission(body);
+  const { entry, persisted } = await addSubmission(body);
+  if (!persisted) {
+    return NextResponse.json(
+      { error: "Could not save your message. Please try again later." },
+      { status: 500 }
+    );
+  }
   const res = NextResponse.json({ ok: true, id: entry.id });
   res.headers.set("Cache-Control", "no-store, max-age=0");
   return res;
