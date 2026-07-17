@@ -1,0 +1,433 @@
+{
+  "nav": {
+    "logo": "Dipti Shrestha",
+    "links": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "About",
+        "href": "/about"
+      },
+      {
+        "label": "Portfolio",
+        "href": "/portfolio"
+      },
+      {
+        "label": "Services",
+        "href": "/services"
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact"
+      }
+    ]
+  },
+  "hero": {
+    "title": "Dipti Shrestha",
+    "role": "Technical Writer & Documentation Architect",
+    "subtitle": "Transforming complex technical information into clear, user-friendly documentation",
+    "stats": [
+      {
+        "label": "Pages Documented",
+        "value": "500+"
+      },
+      {
+        "label": "APIs Documented",
+        "value": "50+"
+      },
+      {
+        "label": "Client Satisfaction",
+        "value": "99%"
+      }
+    ],
+    "cta_primary": "View Documentation",
+    "cta_secondary": "Get a Quote",
+    "image": "https://images.unsplash.com/photo-1784031208107-f489c769e1f9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  "about": {
+    "headline": "Technical Communication Expert",
+    "bio": "I am a Technical Writer and Documentation Architect with over eight years of experience turning dense engineering concepts into precise, accessible documentation. From REST and GraphQL APIs to SDKs, user manuals, and knowledge bases, I build documentation systems that help developers ship faster and reduce support load. My work blends editorial rigor with an intimate understanding of software architecture.",
+    "philosophy": "Documentation is a product, not an afterthought. I believe every reader deserves a clear path from confusion to confidence. Good documentation is measured not by how much is written, but by how little the user has to think.",
+    "expertise": [
+      "API & SDK Documentation",
+      "Developer Experience (DX)",
+      "Information Architecture",
+      "Technical Editing & Style Guides",
+      "Docs-as-Code Workflows",
+      "Localization & Internationalization"
+    ],
+    "experience": [
+      {
+        "role": "Lead Technical Writer",
+        "company": "CloudSync Systems",
+        "duration": "2021 â€” Present",
+        "achievements": [
+          "Authored documentation for 30+ public REST and GraphQL APIs.",
+          "Reduced developer onboarding time by 42% through restructured SDK guides.",
+          "Built a docs-as-code pipeline adopted across 6 engineering teams."
+        ]
+      },
+      {
+        "role": "Senior Technical Writer",
+        "company": "Nova HealthTech",
+        "duration": "2018 â€” 2021",
+        "achievements": [
+          "Documented a HIPAA-compliant healthcare platform used by 200+ clinics.",
+          "Created 120+ knowledge base articles, cutting ticket volume by 35%.",
+          "Standardized terminology with a company-wide style guide."
+        ]
+      },
+      {
+        "role": "Technical Writer",
+        "company": "Lumen Software",
+        "duration": "2016 â€” 2018",
+        "achievements": [
+          "Produced end-user manuals for two enterprise SaaS products.",
+          "Owned the release-notes process across quarterly launches."
+        ]
+      }
+    ],
+    "certifications": [
+      "Google Technical Writing Professional Certificate",
+      "Microsoft Certified: Technical Documentation Specialist",
+      "Certified ScrumMaster (CSM)",
+      "MadCap Flare Certified Specialist"
+    ],
+    "tools": [
+      "Markdown",
+      "Git & GitHub",
+      "Confluence",
+      "MadCap Flare",
+      "Adobe FrameMaker",
+      "Swagger / OpenAPI",
+      "Docusaurus",
+      "Notion"
+    ],
+    "domains": [
+      "SaaS & Cloud",
+      "APIs & Integrations",
+      "Software Applications",
+      "Hardware & IoT",
+      "Healthcare & MedTech"
+    ]
+  },
+  "services": [
+    {
+      "title": "API Documentation",
+      "description": "Clear, complete reference and guides for REST, GraphQL, and SOAP APIs, designed for developer success.",
+      "icon": "code",
+      "price": "From $1,200",
+      "features": [
+        "Endpoint reference with examples",
+        "Authentication & error guides",
+        "Quickstart & tutorials",
+        "OpenAPI/Swagger specs"
+      ],
+      "deliverables": [
+        "API reference site",
+        "Getting-started guide",
+        "Postman/Swagger collection"
+      ]
+    },
+    {
+      "title": "Software Documentation",
+      "description": "User guides, manuals, and release notes that help users adopt your product with confidence.",
+      "icon": "book",
+      "price": "From $900",
+      "features": [
+        "End-user manuals",
+        "In-app help content",
+        "Release notes",
+        "Video script outlines"
+      ],
+      "deliverables": [
+        "User guide PDF/HTML",
+        "Release notes log",
+        "Help-center articles"
+      ]
+    },
+    {
+      "title": "SDK & Developer Documentation",
+      "description": "Language-specific SDK docs and code samples that accelerate integration for your developers.",
+      "icon": "terminal",
+      "price": "From $1,500",
+      "features": [
+        "SDK reference (JS, Python, Java)",
+        "Copy-ready code samples",
+        "Integration tutorials",
+        "Changelog management"
+      ],
+      "deliverables": [
+        "SDK documentation portal",
+        "Code sample library",
+        "Integration playbooks"
+      ]
+    },
+    {
+      "title": "Technical Editing & Review",
+      "description": "Expert editing, consistency checks, and structural review of your existing documentation.",
+      "icon": "edit",
+      "price": "From $600",
+      "features": [
+        "Style & consistency review",
+        "Technical accuracy audit",
+        "Information architecture",
+        "Localization readiness"
+      ],
+      "deliverables": [
+        "Edited manuscripts",
+        "Style guide",
+        "Audit report"
+      ]
+    },
+    {
+      "title": "Documentation Strategy & Audits",
+      "description": "Assess, plan, and architect a documentation system that scales with your product.",
+      "icon": "compass",
+      "price": "From $2,000",
+      "features": [
+        "Docs maturity audit",
+        "Information architecture plan",
+        "Tooling recommendations",
+        "Metrics & KPIs"
+      ],
+      "deliverables": [
+        "Strategy document",
+        "Content roadmap",
+        "Tooling proposal"
+      ]
+    },
+    {
+      "title": "Content Management Setup",
+      "description": "Implement docs-as-code pipelines, CMS configuration, and publishing automation.",
+      "icon": "database",
+      "price": "From $1,800",
+      "features": [
+        "Docs-as-code pipeline",
+        "CMS/SSG setup",
+        "CI/CD publishing",
+        "Contributor workflow"
+      ],
+      "deliverables": [
+        "Configured repository",
+        "Publishing pipeline",
+        "Contributor docs"
+      ]
+    }
+  ],
+  "portfolio": [
+    {
+      "slug": "payments-api-reference",
+      "title": "Payments Platform API Reference",
+      "category": "API",
+      "tech_stack": [
+        "REST API",
+        "OpenAPI",
+        "JSON",
+        "Postman"
+      ],
+      "description": "A complete reference for a global payments API, including authentication, endpoints, and webhooks.",
+      "content": "# Payments Platform API\n\nThis reference documents the public REST API for the Payments Platform. All requests are made to `https://api.payments.example.com/v1`.\n\n## Authentication\n\nAuthenticate using a bearer token in the `Authorization` header.\n\n```bash\ncurl -X GET https://api.payments.example.com/v1/charges \\\n  -H \"Authorization: Bearer YOUR_TOKEN\"\n```\n\n## Create a Charge\n\n```json\n{\n  \"amount\": 2000,\n  \"currency\": \"aud\",\n  \"source\": \"tok_visa\"\n}\n```\n\n## Webhooks\n\nRegister a webhook endpoint to receive asynchronous event notifications such as `charge.succeeded`.",
+      "client": "PayWave Technologies",
+      "published_date": "2024-09-12",
+      "download_link": "#",
+      "featured_image": "https://images.unsplash.com/photo-1582426038983-17ff1fd1424b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "slug": "iot-device-sdk-guide",
+      "title": "IoT Device SDK Integration Guide",
+      "category": "SDK",
+      "tech_stack": [
+        "Python",
+        "MQTT",
+        "C++",
+        "Embedded"
+      ],
+      "description": "Developer guide for an embedded IoT SDK, covering provisioning, telemetry, and OTA updates.",
+      "content": "# IoT Device SDK\n\nThe Device SDK lets you connect hardware to the cloud in minutes.\n\n## Installation\n\n```bash\npip install iot-device-sdk\n```\n\n## Connect a Device\n\n```python\nfrom iot_sdk import Device\n\ndevice = Device(token=\"YOUR_TOKEN\")\ndevice.connect()\ndevice.publish(\"temperature\", 22.5)\n```\n\n## Over-the-Air Updates\n\nDevices poll the update service every 60 seconds and apply signed firmware automatically.",
+      "client": "Lumen Hardware",
+      "published_date": "2024-06-03",
+      "download_link": "#",
+      "featured_image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "slug": "analytics-user-manual",
+      "title": "Analytics Dashboard User Manual",
+      "category": "User Guide",
+      "tech_stack": [
+        "SaaS",
+        "UI",
+        "Markdown"
+      ],
+      "description": "An end-user manual for a product analytics dashboard, from first login to advanced cohorts.",
+      "content": "# Analytics Dashboard\n\nWelcome to the Analytics Dashboard. This guide walks you through every core feature.\n\n## Getting Started\n\n1. Log in with your workspace credentials.\n2. Connect a data source from **Settings > Sources**.\n3. Open the **Overview** tab to see live metrics.\n\n## Building a Cohort\n\nUse the Cohorts builder to segment users by behavior. Save cohorts to reuse them in reports.",
+      "client": "CloudSync Systems",
+      "published_date": "2024-11-20",
+      "download_link": "#",
+      "featured_image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "slug": "platform-v3-release-notes",
+      "title": "Platform v3.0 Release Notes",
+      "category": "Release Notes",
+      "tech_stack": [
+        "Changelog",
+        "Markdown"
+      ],
+      "description": "Structured release notes for a major platform version, highlighting breaking changes.",
+      "content": "# Platform v3.0 Release Notes\n\nReleased: 2025-01-15\n\n## What's New\n\n- New GraphQL gateway with persisted queries.\n- Redesigned billing console.\n\n## Breaking Changes\n\n- Removed the legacy `/v0` endpoints. Migrate to `/v1`.\n- `amount` is now an integer in minor currency units.\n\n## Fixed\n\n- Resolved pagination drift on the `/events` endpoint.",
+      "client": "PayWave Technologies",
+      "published_date": "2025-01-15",
+      "download_link": "#",
+      "featured_image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "slug": "troubleshooting-kb",
+      "title": "Troubleshooting Knowledge Base",
+      "category": "Knowledge Base",
+      "tech_stack": [
+        "Confluence",
+        "Zendesk",
+        "Markdown"
+      ],
+      "description": "A searchable knowledge base of 60+ troubleshooting articles for a SaaS platform.",
+      "content": "# Troubleshooting: Login Failures\n\n## Symptom\n\nUsers see `Invalid credentials` despite a correct password.\n\n## Causes\n\n1. Expired session token.\n2. SSO misconfiguration.\n\n## Resolution\n\n- Clear browser cache and re-authenticate.\n- Verify the SSO ACS URL matches the workspace settings.",
+      "client": "Nova HealthTech",
+      "published_date": "2024-04-08",
+      "download_link": "#",
+      "featured_image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "slug": "graphql-tutorial-series",
+      "title": "GraphQL for Backend Engineers",
+      "category": "Tutorial",
+      "tech_stack": [
+        "GraphQL",
+        "Node.js",
+        "TypeScript"
+      ],
+      "description": "A multi-part tutorial teaching backend engineers to design and document GraphQL schemas.",
+      "content": "# GraphQL for Backend Engineers\n\n## Defining a Schema\n\n```graphql\ntype Query {\n  user(id: ID!): User\n}\n\ntype User {\n  id: ID!\n  name: String!\n  posts: [Post!]!\n}\n```\n\n## Documenting Resolvers\n\nPair each field with a description so your auto-generated docs stay accurate.",
+      "client": "Internal Training",
+      "published_date": "2024-08-19",
+      "download_link": "#",
+      "featured_image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "blog": [
+    {
+      "slug": "writing-api-docs-developers-love",
+      "title": "Writing API Docs Developers Actually Love",
+      "excerpt": "The difference between documentation that gets used and documentation that gets ignored comes down to a few deliberate choices.",
+      "content": "Great API documentation respects the developer's time. Start with a copy-pasteable quickstart, show real responses, and never hide errors. In this post we explore a repeatable structure for API references that reduces support tickets and accelerates integration.",
+      "published_date": "2025-02-10",
+      "read_time": "6 min read",
+      "category": "API Docs",
+      "featured_image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "slug": "docs-as-code-in-practice",
+      "title": "Docs-as-Code in Practice",
+      "excerpt": "Treating documentation like software unlocks review, versioning, and automation you can trust.",
+      "content": "Docs-as-code means writing in Markdown, storing it in Git, and publishing through a pipeline. This post covers the tooling, branching model, and CI checks that make a docs-as-code workflow sustainable for small and large teams alike.",
+      "published_date": "2025-01-28",
+      "read_time": "8 min read",
+      "category": "Best Practices",
+      "featured_image": "https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "slug": "tools-i-use-in-2025",
+      "title": "The Documentation Toolchain I Rely On in 2025",
+      "excerpt": "A practical tour of the tools that power a modern technical writing workflow.",
+      "content": "From Docusaurus to MadCap Flare, the documentation toolchain keeps evolving. Here is the stack I reach for when starting a new docs project, and why each tool earns its place.",
+      "published_date": "2024-12-15",
+      "read_time": "5 min read",
+      "category": "Tools",
+      "featured_image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "slug": "trends-in-technical-writing",
+      "title": "Where Technical Writing Is Heading",
+      "excerpt": "AI, interactive docs, and developer experience are reshaping our discipline. Here is what to watch.",
+      "content": "Technical writing is shifting from static pages to interactive, personalized experiences. We look at how AI-assisted authoring and embedded live examples are changing expectations for documentation teams.",
+      "published_date": "2024-11-02",
+      "read_time": "7 min read",
+      "category": "Industry Trends",
+      "featured_image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Dipti turned our fragmented API docs into a resource our developers cite as a competitive advantage. Support tickets dropped measurably within a month.",
+      "name": "Marcus Reed",
+      "role": "CTO",
+      "company": "PayWave Technologies",
+      "avatar": "https://ui-avatars.com/api/?name=Marcus+Reed&background=0D7377&color=fff"
+    },
+    {
+      "quote": "The clearest, most thorough SDK documentation I've worked with. Our integration partners onboarded in days instead of weeks.",
+      "name": "Priya Nair",
+      "role": "Head of Engineering",
+      "company": "CloudSync Systems",
+      "avatar": "https://ui-avatars.com/api/?name=Priya+Nair&background=3B82F6&color=fff"
+    },
+    {
+      "quote": "Dipti's audit identified gaps we didn't know we had. The new information architecture is a genuine step change.",
+      "name": "Daniel Okafor",
+      "role": "Product Lead",
+      "company": "Lumen Software",
+      "avatar": "https://ui-avatars.com/api/?name=Daniel+Okafor&background=1A1A1A&color=fff"
+    }
+  ],
+  "contact": {
+    "email": "shresthadipti04@gmail.com",
+    "phone": "+61 483 952 377",
+    "location": "Melbourne, Australia / Kathmandu, Nepal",
+    "socials": [
+      {
+        "label": "LinkedIn",
+        "href": "https://linkedin.com/in/diptishrestha"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/diptishrestha"
+      },
+      {
+        "label": "X",
+        "href": "https://x.com/dipti_writes"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "name": "PayWave",
+      "image": ""
+    },
+    {
+      "name": "CloudSync",
+      "image": ""
+    },
+    {
+      "name": "Nova HealthTech",
+      "image": ""
+    },
+    {
+      "name": "Lumen",
+      "image": ""
+    },
+    {
+      "name": "MedBridge",
+      "image": ""
+    },
+    {
+      "name": "Apex APIs",
+      "image": ""
+    }
+  ]
+}
