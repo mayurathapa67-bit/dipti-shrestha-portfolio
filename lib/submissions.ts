@@ -42,12 +42,12 @@ function writeLocal(all: ContactSubmission[]): boolean {
   }
 }
 
-export function getSubmissions(): ContactSubmission[] {
+export async function getSubmissions(): Promise<ContactSubmission[]> {
   // Always prefer GitHub when it is configured (serverless hosts have an
   // ephemeral local FS, so the local file is never the source of truth).
   // Fall back to the local file only if the remote read fails.
   if (isGitHubConfigured()) {
-    const remote = getFileFromGitHub("submissions.json");
+    const remote = await getFileFromGitHub("submissions.json");
     if (Array.isArray(remote) && remote.length > 0) {
       return remote as ContactSubmission[];
     }
@@ -69,7 +69,7 @@ export async function addSubmission(
         : String(Date.now()),
     created_at: new Date().toISOString(),
   };
-  const all = getSubmissions();
+  const all = await getSubmissions();
   all.unshift(entry);
 
   let persisted = writeLocal(all);
@@ -87,7 +87,7 @@ export async function addSubmission(
 }
 
 export async function deleteSubmission(id: string): Promise<boolean> {
-  const all = getSubmissions();
+  const all = await getSubmissions();
   const next = all.filter((s) => s.id !== id);
   if (next.length === all.length) return false;
 

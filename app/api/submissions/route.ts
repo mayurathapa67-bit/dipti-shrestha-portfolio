@@ -8,7 +8,7 @@ export async function GET() {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const submissions = getSubmissions();
+  const submissions = await getSubmissions();
   const res = NextResponse.json({ submissions });
   res.headers.set("Cache-Control", "no-store, max-age=0");
   return res;

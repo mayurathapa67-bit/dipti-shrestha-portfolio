@@ -143,11 +143,14 @@ export async function getFileFromGitHub(
           Accept: "application/vnd.github.raw+json",
         },
         cache: "no-store",
-        next: { revalidate: 0 },
       }
     );
     if (!res.ok) return null;
-    return await res.json();
+    // Read as text and parse manually: the raw+json endpoint returns the file
+    // content directly, and res.json() can misbehave on its content-type in
+    // some runtimes (returning {} instead of the parsed array).
+    const text = await res.text();
+    return JSON.parse(text);
   } catch {
     return null;
   }
