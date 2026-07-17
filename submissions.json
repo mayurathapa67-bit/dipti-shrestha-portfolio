@@ -62,13 +62,5 @@
     "message": "fsdfsdfs",
     "id": "15888716-6830-49ca-8fea-b031b7a20939",
     "created_at": "2026-07-16T08:41:14.575Z"
-  },
-  {
-    "name": "Test Dev",
-    "email": "t@e.com",
-    "subject": "Hi",
-    "message": "Hello there this is a test.",
-    "id": "4acf301f-5c2c-4df5-a5be-0e883ecbfd22",
-    "created_at": "2026-07-16T08:37:22.012Z"
   }
 ]
