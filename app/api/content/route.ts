@@ -31,15 +31,15 @@ export async function POST(request: NextRequest) {
   }
 
   const merged = mergeContent(body as Partial<SiteContent>);
-  const saved = writeContent(merged);
+  const savedLocally = writeContent(merged);
 
-  let github: { success: boolean; message: string } | null = null;
-  if (saved) {
-    github = await pushContentToGitHub(merged);
-  }
+  const github = await pushContentToGitHub(merged);
+
+  const persisted = github.success || savedLocally;
 
   const res = NextResponse.json({
-    ok: saved,
+    ok: persisted,
+    savedLocally,
     github,
   });
   res.headers.set("Cache-Control", "no-store, max-age=0");

@@ -35,8 +35,12 @@ export async function getContent(): Promise<SiteContent> {
   // admin saves durable across serverless instances, since the local
   // filesystem on Vercel is ephemeral.
   if (process.env.USE_GITHUB_CONTENT === "true") {
-    const owner = process.env.GITHUB_REPO_OWNER;
-    const repo = process.env.GITHUB_REPO_NAME;
+    const combined = process.env.GITHUB_REPO ?? "";
+    const [ownerFromCombined, repoFromCombined] = combined.includes("/")
+      ? combined.split("/")
+      : ["", ""];
+    const owner = ownerFromCombined || process.env.GITHUB_REPO_OWNER;
+    const repo = repoFromCombined || process.env.GITHUB_REPO_NAME;
     if (owner && repo) {
       try {
         const res = await fetch(

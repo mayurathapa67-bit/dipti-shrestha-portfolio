@@ -1,8 +1,20 @@
 import "server-only";
 
 const GITHUB_API_BASE = "https://api.github.com";
-const REPO_OWNER = process.env.GITHUB_REPO_OWNER ?? "diptishrestha";
-const REPO_NAME = process.env.GITHUB_REPO_NAME ?? "portfolio-content";
+
+function resolveRepo(): { owner: string; name: string } {
+  const combined = process.env.GITHUB_REPO ?? "";
+  if (combined.includes("/")) {
+    const [owner, name] = combined.split("/");
+    return { owner, name };
+  }
+  return {
+    owner: process.env.GITHUB_REPO_OWNER ?? "",
+    name: process.env.GITHUB_REPO_NAME ?? "",
+  };
+}
+
+const { owner: REPO_OWNER, name: REPO_NAME } = resolveRepo();
 const BRANCH = process.env.GITHUB_BRANCH ?? "main";
 const TOKEN = process.env.GITHUB_TOKEN ?? "";
 
@@ -46,6 +58,13 @@ export async function pushContentToGitHub(
     return {
       success: false,
       message: "GitHub token not configured.",
+    };
+  }
+  if (!REPO_OWNER || !REPO_NAME) {
+    return {
+      success: false,
+      message:
+        "GitHub repo not configured. Set GITHUB_REPO=owner/name (or GITHUB_REPO_OWNER + GITHUB_REPO_NAME).",
     };
   }
   const filePath = "content.json";
